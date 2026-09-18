@@ -1,5 +1,7 @@
 "use client";
 
+import MobileNav from "@/components/MobileNav";
+import { branches } from "@/data/branches";
 import { useState } from "react";
 import {
   ArrowRight,
@@ -9,7 +11,6 @@ import {
   Clock,
   Headphones,
   MapPin,
-  Menu,
   MessageCircle,
   Newspaper,
   Phone,
@@ -18,27 +19,6 @@ import {
   Wifi,
   Wrench,
 } from "lucide-react";
-
-const branches = [
-  {
-    id: "bad-vilbel",
-    city: "Bad Vilbel",
-    name: "BV COM Bad Vilbel",
-    address: "Frankfurter Straße 115, 61118 Bad Vilbel",
-    phone: "+49 6101 000000",
-    whatsapp: "+49 170 0000000",
-    hours: "Mo–Sa · 10:00–19:00",
-  },
-  {
-    id: "frankfurt",
-    city: "Frankfurt",
-    name: "BV COM Frankfurt",
-    address: "Frankfurt am Main",
-    phone: "+49 69 000000",
-    whatsapp: "+49 170 0000000",
-    hours: "Mo–Sa · 10:00–19:00",
-  },
-];
 
 const services = [
   {
@@ -106,7 +86,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#fafafa] text-zinc-950">
       {/* Announcement Bar */}
       <div className="bg-zinc-950 text-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-center gap-3 px-5 py-3 text-center text-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2.5 text-center text-xs sm:text-sm">
           <Newspaper size={16} className="shrink-0 text-fuchsia-400" />
 
           <span className="text-zinc-300">Neu bei BV COM:</span>
@@ -158,22 +138,20 @@ export default function Home() {
             Beratung
           </a>
 
-          <button className="md:hidden">
-            <Menu />
-          </button>
+          <MobileNav />
         </div>
       </header>
 
       {/* Hero */}
       <section>
-        <div className="mx-auto grid min-h-[620px] max-w-7xl items-center gap-14 px-5 py-20 lg:grid-cols-[1.1fr_.9fr] lg:px-8">
+        <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 py-14 sm:py-20 lg:min-h-[620px] lg:grid-cols-[1.1fr_.9fr] lg:px-8">
           <div>
             <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-fuchsia-200 bg-fuchsia-50 px-4 py-2 text-sm font-semibold text-fuchsia-700">
               <MapPin size={15} />
               Mehrere Filialen · Persönliche Beratung
             </div>
 
-            <h1 className="max-w-3xl text-5xl font-black leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl">
+            <h1 className="max-w-3xl text-4xl font-black leading-[1.02] tracking-tight sm:text-6xl lg:text-7xl">
               Kommunikation,
               <br />
               <span className="text-fuchsia-600">einfach gemacht.</span>
@@ -332,10 +310,13 @@ export default function Home() {
                   WhatsApp
                 </button>
 
-                <button className="flex items-center justify-center gap-2 rounded-full border border-zinc-700 px-6 py-3.5 font-bold">
+                <a
+                  href={`/filialen/${selectedBranch.slug}`}
+                  className="flex items-center justify-center gap-2 rounded-full border border-zinc-700 px-6 py-3.5 font-bold"
+                >
                   Zur Filiale
                   <ArrowRight size={17} />
-                </button>
+                </a>
               </div>
             </div>
           </div>
