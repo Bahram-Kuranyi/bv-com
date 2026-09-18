@@ -1,8 +1,8 @@
 "use client";
 
-import MobileNav from "@/components/MobileNav";
-import { branches } from "@/data/branches";
 import { useState } from "react";
+import Link from "next/link";
+
 import {
   ArrowRight,
   Building2,
@@ -19,6 +19,9 @@ import {
   Wifi,
   Wrench,
 } from "lucide-react";
+
+import MobileNav from "@/components/MobileNav";
+import { branches } from "@/data/branches";
 
 const services = [
   {
@@ -84,7 +87,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-[#fafafa] text-zinc-950">
-      {/* Announcement Bar */}
+      {/* Announcement */}
       <div className="bg-zinc-950 text-white">
         <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2.5 text-center text-xs sm:text-sm">
           <Newspaper size={16} className="shrink-0 text-fuchsia-400" />
@@ -102,31 +105,32 @@ export default function Home() {
       {/* Navbar */}
       <header className="sticky top-0 z-50 border-b border-zinc-200/70 bg-white/90 backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 lg:px-8">
-          <a href="#" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-fuchsia-600 font-black text-white">
               BV
             </div>
 
             <div>
               <div className="font-black leading-none">BV COM</div>
+
               <div className="mt-1 text-xs text-zinc-500">Communications</div>
             </div>
-          </a>
+          </Link>
 
           <nav className="hidden items-center gap-8 text-sm font-semibold md:flex">
-            <a href="#filialen" className="hover:text-fuchsia-600">
+            <a href="#filialen" className="transition hover:text-fuchsia-600">
               Filialen
             </a>
 
-            <a href="#leistungen" className="hover:text-fuchsia-600">
+            <a href="#leistungen" className="transition hover:text-fuchsia-600">
               Leistungen
             </a>
 
-            <a href="#news" className="hover:text-fuchsia-600">
+            <a href="#news" className="transition hover:text-fuchsia-600">
               News
             </a>
 
-            <a href="#angebote" className="hover:text-fuchsia-600">
+            <a href="#angebote" className="transition hover:text-fuchsia-600">
               Angebote
             </a>
           </nav>
@@ -173,7 +177,7 @@ export default function Home() {
 
               <a
                 href="#news"
-                className="flex items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-6 py-3.5 font-bold"
+                className="flex items-center justify-center gap-2 rounded-full border border-zinc-300 bg-white px-6 py-3.5 font-bold transition hover:bg-zinc-100"
               >
                 <Newspaper size={18} />
                 Neuigkeiten
@@ -181,6 +185,7 @@ export default function Home() {
             </div>
           </div>
 
+          {/* Hero Visual */}
           <div className="relative">
             <div className="absolute -left-16 -top-16 h-72 w-72 rounded-full bg-fuchsia-200/60 blur-3xl" />
 
@@ -202,6 +207,7 @@ export default function Home() {
 
                 <div className="mt-12 flex items-center gap-3 border-t border-zinc-800 pt-6">
                   <Headphones className="text-fuchsia-400" />
+
                   <span className="text-sm font-semibold">
                     Persönlicher Service
                   </span>
@@ -212,36 +218,39 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Branch Selection */}
-      <section id="filialen" className="bg-white py-24">
+      {/* Branches */}
+      <section id="filialen" className="bg-white py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <div className="text-sm font-bold uppercase tracking-[0.2em] text-fuchsia-600">
               Unsere Filialen
             </div>
 
-            <h2 className="mt-4 text-4xl font-black tracking-tight">
+            <h2 className="mt-4 text-3xl font-black tracking-tight sm:text-4xl">
               Wählen Sie Ihre Filiale.
             </h2>
 
-            <p className="mt-4 text-lg text-zinc-600">
+            <p className="mt-4 text-base leading-7 text-zinc-600 sm:text-lg">
               Angebote, Kontaktinformationen und Services können je nach
               Standort unterschiedlich sein.
             </p>
           </div>
 
+          {/* Branch Cards */}
           <div className="mx-auto mt-12 grid max-w-4xl gap-5 md:grid-cols-2">
             {branches.map((branch) => {
               const active = selectedBranch.id === branch.id;
 
               return (
-                <button
+                <Link
                   key={branch.id}
-                  onClick={() => setSelectedBranch(branch)}
-                  className={`relative rounded-3xl border p-7 text-left transition ${
+                  href={`/filialen/${branch.slug}`}
+                  onMouseEnter={() => setSelectedBranch(branch)}
+                  onFocus={() => setSelectedBranch(branch)}
+                  className={`group relative block rounded-3xl border p-7 text-left transition-all duration-200 ${
                     active
                       ? "border-fuchsia-500 bg-fuchsia-50 shadow-lg shadow-fuchsia-100"
-                      : "border-zinc-200 bg-white hover:border-fuchsia-300"
+                      : "border-zinc-200 bg-white hover:border-fuchsia-300 hover:bg-fuchsia-50/30 hover:shadow-lg"
                   }`}
                 >
                   {active && (
@@ -252,7 +261,11 @@ export default function Home() {
 
                   <Building2
                     size={28}
-                    className={active ? "text-fuchsia-600" : "text-zinc-400"}
+                    className={
+                      active
+                        ? "text-fuchsia-600"
+                        : "text-zinc-400 transition-colors group-hover:text-fuchsia-500"
+                    }
                   />
 
                   <div className="mt-6 text-sm font-semibold text-zinc-500">
@@ -266,57 +279,71 @@ export default function Home() {
                   </div>
 
                   <div className="mt-6 flex items-center gap-2 font-bold text-fuchsia-700">
-                    Filiale auswählen
-                    <ArrowRight size={17} />
+                    Zur Filiale
+                    <ArrowRight
+                      size={17}
+                      className="transition-transform group-hover:translate-x-1"
+                    />
                   </div>
-                </button>
+                </Link>
               );
             })}
           </div>
 
-          {/* Selected Branch */}
-          <div className="mx-auto mt-8 max-w-4xl rounded-3xl bg-zinc-950 p-7 text-white md:p-9">
-            <div className="grid gap-8 md:grid-cols-[1fr_auto] md:items-center">
+          {/* Branch Preview */}
+          <div className="mx-auto mt-8 max-w-4xl overflow-hidden rounded-3xl bg-zinc-950 text-white">
+            <div className="grid gap-8 p-7 md:grid-cols-[1fr_auto] md:items-center md:p-9">
               <div>
                 <div className="text-sm font-semibold text-fuchsia-400">
                   Ausgewählte Filiale
                 </div>
 
-                <h3 className="mt-2 text-3xl font-black">
+                <h3 className="mt-2 text-2xl font-black sm:text-3xl">
                   {selectedBranch.name}
                 </h3>
 
-                <div className="mt-5 flex flex-col gap-3 text-sm text-zinc-400">
-                  <div className="flex items-center gap-3">
-                    <MapPin size={17} />
-                    {selectedBranch.address}
+                <div className="mt-6 flex flex-col gap-4 text-sm text-zinc-400">
+                  <div className="flex items-start gap-3">
+                    <MapPin size={17} className="mt-0.5 shrink-0" />
+
+                    <span>{selectedBranch.address}</span>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Clock size={17} />
-                    {selectedBranch.hours}
+                    <Clock size={17} className="shrink-0" />
+
+                    <span>{selectedBranch.hours}</span>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <Phone size={17} />
-                    {selectedBranch.phone}
+                    <Phone size={17} className="shrink-0" />
+
+                    <span>{selectedBranch.phone}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-3">
-                <button className="flex items-center justify-center gap-2 rounded-full bg-fuchsia-600 px-6 py-3.5 font-bold">
+              <div className="flex flex-col gap-3 sm:flex-row md:flex-col">
+                <a
+                  href={`https://wa.me/${selectedBranch.whatsapp.replace(
+                    /\D/g,
+                    "",
+                  )}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center justify-center gap-2 rounded-full bg-fuchsia-600 px-6 py-3.5 font-bold transition hover:bg-fuchsia-500"
+                >
                   <MessageCircle size={18} />
                   WhatsApp
-                </button>
+                </a>
 
-                <a
+                <Link
                   href={`/filialen/${selectedBranch.slug}`}
-                  className="flex items-center justify-center gap-2 rounded-full border border-zinc-700 px-6 py-3.5 font-bold"
+                  className="flex items-center justify-center gap-2 rounded-full border border-zinc-700 px-6 py-3.5 font-bold transition hover:border-zinc-500 hover:bg-zinc-900"
                 >
                   Zur Filiale
                   <ArrowRight size={17} />
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -324,19 +351,19 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section id="leistungen" className="py-24">
+      <section id="leistungen" className="py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div>
             <div className="text-sm font-bold uppercase tracking-[0.2em] text-fuchsia-600">
               Leistungen
             </div>
 
-            <h2 className="mt-4 text-4xl font-black">
+            <h2 className="mt-4 text-3xl font-black sm:text-4xl">
               Was können wir für Sie tun?
             </h2>
           </div>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4">
             {services.map((service) => {
               const Icon = service.icon;
 
@@ -360,7 +387,7 @@ export default function Home() {
       </section>
 
       {/* News */}
-      <section id="news" className="bg-white py-24">
+      <section id="news" className="bg-white py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
@@ -368,7 +395,7 @@ export default function Home() {
                 Aktuelles
               </div>
 
-              <h2 className="mt-4 text-4xl font-black">
+              <h2 className="mt-4 text-3xl font-black sm:text-4xl">
                 Neuigkeiten von BV COM.
               </h2>
             </div>
@@ -379,13 +406,13 @@ export default function Home() {
             </button>
           </div>
 
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 lg:mt-12 lg:grid-cols-3">
             {news.map((item) => (
               <article
                 key={item.title}
                 className="group rounded-3xl border border-zinc-200 bg-[#fafafa] p-7 transition hover:border-fuchsia-200 hover:bg-white hover:shadow-xl"
               >
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between gap-4">
                   <span className="rounded-full bg-fuchsia-100 px-3 py-1 text-xs font-bold text-fuchsia-700">
                     {item.category}
                   </span>
@@ -413,19 +440,19 @@ export default function Home() {
       </section>
 
       {/* Offers */}
-      <section id="angebote" className="py-24">
+      <section id="angebote" className="py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-5 lg:px-8">
           <div className="max-w-2xl">
             <div className="text-sm font-bold uppercase tracking-[0.2em] text-fuchsia-600">
               Angebote
             </div>
 
-            <h2 className="mt-4 text-4xl font-black">
+            <h2 className="mt-4 text-3xl font-black sm:text-4xl">
               Das Richtige für jeden Bedarf.
             </h2>
           </div>
 
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-3 lg:mt-12">
             {offers.map((offer) => (
               <div
                 key={offer.title}
@@ -433,7 +460,9 @@ export default function Home() {
               >
                 <Smartphone size={32} className="text-fuchsia-400" />
 
-                <h3 className="mt-20 text-2xl font-black">{offer.title}</h3>
+                <h3 className="mt-14 text-2xl font-black md:mt-20">
+                  {offer.title}
+                </h3>
 
                 <p className="mt-3 leading-7 text-zinc-400">{offer.text}</p>
 
@@ -450,9 +479,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section id="kontakt" className="px-5 pb-24 lg:px-8">
-        <div className="mx-auto max-w-7xl rounded-[2.5rem] bg-fuchsia-600 px-7 py-14 text-white md:px-14">
+      {/* Contact */}
+      <section id="kontakt" className="px-5 pb-20 md:pb-24 lg:px-8">
+        <div className="mx-auto max-w-7xl rounded-[2rem] bg-fuchsia-600 px-7 py-12 text-white md:rounded-[2.5rem] md:px-14 md:py-14">
           <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
             <div>
               <div className="text-sm font-semibold text-fuchsia-100">
@@ -469,26 +498,39 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-              <button className="flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 font-bold text-fuchsia-700">
+              <a
+                href={`https://wa.me/${selectedBranch.whatsapp.replace(
+                  /\D/g,
+                  "",
+                )}`}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 font-bold text-fuchsia-700"
+              >
                 <MessageCircle size={18} />
                 WhatsApp
-              </button>
+              </a>
 
-              <button className="flex items-center justify-center gap-2 rounded-full border border-fuchsia-400 px-6 py-3.5 font-bold">
+              <a
+                href={`tel:${selectedBranch.phone}`}
+                className="flex items-center justify-center gap-2 rounded-full border border-fuchsia-400 px-6 py-3.5 font-bold"
+              >
                 <Phone size={18} />
                 Anrufen
-              </button>
+              </a>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="border-t border-zinc-200 bg-white">
         <div className="mx-auto flex max-w-7xl flex-col justify-between gap-4 px-5 py-8 text-sm text-zinc-500 md:flex-row lg:px-8">
           <div>© 2026 BV COM</div>
 
           <div className="flex gap-5">
             <a href="#">Impressum</a>
+
             <a href="#">Datenschutz</a>
           </div>
         </div>
