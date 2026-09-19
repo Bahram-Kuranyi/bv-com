@@ -1,5 +1,6 @@
 "use client";
 
+import PartnerStrip from "@/components/PartnerStrip";
 import PartnerLogoBackground from "@/components/PartnerLogoBackground";
 import { useState } from "react";
 import Link from "next/link";
@@ -281,16 +282,7 @@ export default function Home() {
         </section>
 
         {/* Provider Strip */}
-        <section className="border-y border-zinc-200 bg-[#fafafa]">
-          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-10 gap-y-4 px-5 py-7 text-sm font-black text-zinc-400 lg:px-8">
-            <span>Telekom</span>
-            <span>Vodafone</span>
-            <span>O₂</span>
-            <span>1&1</span>
-            <span>congstar</span>
-            <span>Weitere Anbieter</span>
-          </div>
-        </section>
+        <PartnerStrip />
 
         {/* Branches */}
         <section id="filialen" className="bg-white/55 py-20 md:py-24">
