@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
 
@@ -450,28 +449,15 @@ export default function Home() {
             <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {services.map((service) => {
                 const Icon = service.icon;
-                const isEnergy = service.title === "Strom & Gas";
 
                 return (
                   <div
                     key={service.title}
                     className="rounded-3xl border border-zinc-200 bg-white p-5 transition hover:-translate-y-1 hover:shadow-xl xl:p-6"
                   >
-                    {isEnergy ? (
-                      <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl">
-                        <Image
-                          src="/partners/strom-gas.png"
-                          alt="Strom und Gas"
-                          width={100}
-                          height={180}
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                    ) : (
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-fuchsia-50 text-fuchsia-600">
-                        <Icon size={23} />
-                      </div>
-                    )}
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-fuchsia-50 text-fuchsia-600">
+                      <Icon size={23} />
+                    </div>
 
                     <h3 className="mt-6 text-lg font-black xl:text-xl">
                       {service.title}
