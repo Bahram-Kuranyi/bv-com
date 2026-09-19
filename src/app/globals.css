@@ -128,3 +128,15 @@
     @apply font-sans;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: #d946ef;
+  color: white;
+}
