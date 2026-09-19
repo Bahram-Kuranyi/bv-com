@@ -60,6 +60,22 @@ const partners = [
     phase: 4.2,
     direction: -1,
   },
+  {
+    name: "otelo",
+    src: "/partners/Otelo_logo.svg",
+    position: "right-[6%] top-[88%]",
+    width: "w-20 md:w-28",
+    phase: 4.8,
+    direction: 1,
+  },
+  {
+    name: "Strom & Gas",
+    src: "/partners/strom-gas.png",
+    position: "right-[7%] top-[74%]",
+    width: "w-16 md:w-24",
+    phase: 4.6,
+    direction: 1,
+  },
 ];
 
 type FloatingLogoProps = {

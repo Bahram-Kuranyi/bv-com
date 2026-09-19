@@ -1,9 +1,15 @@
 "use client";
 
-import PartnerStrip from "@/components/PartnerStrip";
-import PartnerLogoBackground from "@/components/PartnerLogoBackground";
+import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
+
+import EnergySection from "@/components/EnergySection";
+import PartnerStrip from "@/components/PartnerStrip";
+import PartnerLogoBackground from "@/components/PartnerLogoBackground";
+import MobileNav from "@/components/MobileNav";
+
+import { branches } from "@/data/branches";
 
 import {
   ArrowRight,
@@ -26,10 +32,8 @@ import {
   Users,
   Wifi,
   Wrench,
+  Zap,
 } from "lucide-react";
-
-import MobileNav from "@/components/MobileNav";
-import { branches } from "@/data/branches";
 
 const services = [
   {
@@ -51,6 +55,11 @@ const services = [
     title: "Service & Support",
     text: "Einrichtung, Beratung und Unterstützung rund um Ihre Geräte.",
     icon: Wrench,
+  },
+  {
+    title: "Strom & Gas",
+    text: "Strom- und Gastarife vergleichen und persönlich beraten lassen.",
+    icon: Zap,
   },
 ];
 
@@ -156,6 +165,7 @@ export default function Home() {
 
               <div>
                 <div className="text-lg font-black leading-none">BV COM</div>
+
                 <div className="mt-1 text-[11px] text-zinc-500">
                   Communications
                 </div>
@@ -212,7 +222,7 @@ export default function Home() {
               </h1>
 
               <p className="mt-7 max-w-xl text-lg leading-8 text-zinc-600">
-                Mobilfunk, Smartphones, Internet und Service – einfach
+                Mobilfunk, Smartphones, Internet, Energie und Service – einfach
                 vergleichen und persönlich beraten lassen.
               </p>
 
@@ -243,6 +253,7 @@ export default function Home() {
             {/* Demo Highlight */}
             <div className="relative">
               <div className="absolute -right-32 -top-24 h-80 w-80 rounded-full bg-fuchsia-100 blur-3xl" />
+
               <div className="absolute -bottom-20 -left-16 h-72 w-72 rounded-full bg-violet-100 blur-3xl" />
 
               <div className="relative rounded-[2rem] border border-zinc-200 bg-[#fafafa] p-5 shadow-xl shadow-zinc-200/60">
@@ -273,6 +284,7 @@ export default function Home() {
 
               <div className="absolute -bottom-5 right-4 rounded-2xl border border-zinc-200 bg-white px-5 py-4 shadow-xl sm:right-8">
                 <div className="text-xs text-zinc-400">Demo</div>
+
                 <div className="mt-1 font-bold">
                   Inhalte später im CMS verwalten
                 </div>
@@ -281,7 +293,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Provider Strip */}
+        {/* Partners */}
         <PartnerStrip />
 
         {/* Branches */}
@@ -357,7 +369,7 @@ export default function Home() {
               })}
             </div>
 
-            {/* Selected Branch Preview */}
+            {/* Selected Branch */}
             <div className="mx-auto mt-7 max-w-4xl overflow-hidden rounded-3xl bg-zinc-950 text-white shadow-xl">
               <div className="grid gap-8 p-7 md:grid-cols-[1fr_auto] md:items-center md:p-9">
                 <div>
@@ -372,16 +384,19 @@ export default function Home() {
                   <div className="mt-6 flex flex-col gap-4 text-sm text-zinc-400">
                     <div className="flex items-start gap-3">
                       <MapPin size={17} className="mt-0.5 shrink-0" />
+
                       {selectedBranch.address}
                     </div>
 
                     <div className="flex items-center gap-3">
                       <Clock size={17} />
+
                       {selectedBranch.hours}
                     </div>
 
                     <div className="flex items-center gap-3">
                       <Phone size={17} />
+
                       {selectedBranch.phone}
                     </div>
                   </div>
@@ -423,7 +438,7 @@ export default function Home() {
               </div>
 
               <h2 className="mt-4 text-3xl font-black sm:text-4xl">
-                Alles rund um Kommunikation.
+                Alles rund um Kommunikation & Energie.
               </h2>
 
               <p className="mt-4 leading-7 text-zinc-600">
@@ -431,20 +446,36 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {/* 5 cards in one desktop row */}
+            <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {services.map((service) => {
                 const Icon = service.icon;
+                const isEnergy = service.title === "Strom & Gas";
 
                 return (
                   <div
                     key={service.title}
-                    className="rounded-3xl border border-zinc-200 bg-white p-6 transition hover:-translate-y-1 hover:shadow-xl"
+                    className="rounded-3xl border border-zinc-200 bg-white p-5 transition hover:-translate-y-1 hover:shadow-xl xl:p-6"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-fuchsia-50 text-fuchsia-600">
-                      <Icon size={23} />
-                    </div>
+                    {isEnergy ? (
+                      <div className="flex h-16 w-16 items-center justify-center overflow-hidden rounded-2xl">
+                        <Image
+                          src="/partners/strom-gas.png"
+                          alt="Strom und Gas"
+                          width={100}
+                          height={180}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-fuchsia-50 text-fuchsia-600">
+                        <Icon size={23} />
+                      </div>
+                    )}
 
-                    <h3 className="mt-6 text-xl font-black">{service.title}</h3>
+                    <h3 className="mt-6 text-lg font-black xl:text-xl">
+                      {service.title}
+                    </h3>
 
                     <p className="mt-3 text-sm leading-6 text-zinc-600">
                       {service.text}
@@ -460,6 +491,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* Energy */}
+        <EnergySection />
 
         {/* News */}
         <section id="news" className="bg-white/55 py-20 md:py-24">
@@ -644,6 +678,7 @@ export default function Home() {
 
                       <div>
                         <div className="font-black">{benefit.title}</div>
+
                         <div className="mt-1 text-sm text-zinc-500">
                           {benefit.text}
                         </div>
@@ -730,16 +765,19 @@ export default function Home() {
                 <div className="mt-7 space-y-4 text-sm text-zinc-400">
                   <div className="flex gap-3">
                     <MapPin size={18} className="shrink-0 text-fuchsia-400" />
+
                     {selectedBranch.address}
                   </div>
 
                   <div className="flex gap-3">
                     <Clock size={18} className="shrink-0 text-fuchsia-400" />
+
                     {selectedBranch.hours}
                   </div>
 
                   <div className="flex gap-3">
                     <Phone size={18} className="shrink-0 text-fuchsia-400" />
+
                     {selectedBranch.phone}
                   </div>
                 </div>
@@ -753,12 +791,15 @@ export default function Home() {
           <div className="mx-auto flex max-w-7xl flex-col justify-between gap-5 px-5 py-8 text-sm text-zinc-500 md:flex-row lg:px-8">
             <div>
               <span className="font-bold text-zinc-900">BV COM</span>
-              <span className="ml-2">Mobil · Internet · Service</span>
+
+              <span className="ml-2">Mobil · Internet · Energie · Service</span>
             </div>
 
             <div className="flex flex-wrap gap-5">
               <a href="#">Impressum</a>
+
               <a href="#">Datenschutz</a>
+
               <span>© 2026 BV COM</span>
             </div>
           </div>
