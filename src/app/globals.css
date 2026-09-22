@@ -140,3 +140,27 @@ body {
   background: #d946ef;
   color: white;
 }
+
+/* Keep anchored sections clear of the sticky navigation. */
+section[id] {
+  scroll-margin-top: 6rem;
+}
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible {
+  outline: 2px solid #c026d3;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

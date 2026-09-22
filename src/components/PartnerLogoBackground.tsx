@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 
 const partners = [
   {
@@ -84,6 +84,7 @@ type FloatingLogoProps = {
 
 function FloatingLogo({ partner }: FloatingLogoProps) {
   const { scrollY } = useScroll();
+  const reduceMotion = useReducedMotion();
 
   const x = useTransform(scrollY, (value) => {
     return Math.sin(value / 520 + partner.phase) * 24 * partner.direction;
@@ -100,9 +101,9 @@ function FloatingLogo({ partner }: FloatingLogoProps) {
   return (
     <motion.div
       style={{
-        x,
-        y,
-        rotate,
+        x: reduceMotion ? 0 : x,
+        y: reduceMotion ? 0 : y,
+        rotate: reduceMotion ? 0 : rotate,
       }}
       className={`absolute ${partner.position} ${partner.width}`}
     >

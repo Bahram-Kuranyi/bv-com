@@ -58,14 +58,14 @@ export default function PartnerStrip() {
         </div>
 
         {/* Featured */}
-        <div className="mx-auto mt-8 grid max-w-6xl grid-cols-2 gap-4 md:grid-cols-5">
+        <div className="mx-auto mt-8 grid max-w-6xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-5">
           {featuredPartners.map((partner) => {
             const isEnergy = partner.name === "Strom & Gas";
 
             return (
               <div
                 key={partner.name}
-                className="group flex h-28 items-center justify-center rounded-2xl border border-zinc-200 bg-white p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-fuchsia-200 hover:shadow-lg"
+                className={`group flex min-w-0 h-24 sm:h-28 items-center justify-center rounded-2xl border border-zinc-200 bg-white p-3 sm:p-5 shadow-sm transition duration-200 hover:-translate-y-1 hover:border-fuchsia-200 hover:shadow-lg ${isEnergy ? "col-span-2 md:col-span-1" : ""}`}
               >
                 <Image
                   src={partner.src}
@@ -74,8 +74,8 @@ export default function PartnerStrip() {
                   height={isEnergy ? 190 : 90}
                   className={
                     isEnergy
-                      ? "max-h-20 w-auto object-contain transition duration-200 group-hover:scale-105"
-                      : "max-h-16 max-w-[145px] object-contain transition duration-200 group-hover:scale-105 md:max-w-[160px]"
+                      ? "max-h-16 w-auto object-contain transition duration-200 group-hover:scale-105 sm:max-h-20"
+                      : "h-auto max-h-16 w-full max-w-[145px] object-contain transition duration-200 group-hover:scale-105 md:max-w-[160px]"
                   }
                 />
               </div>
@@ -89,7 +89,7 @@ export default function PartnerStrip() {
             Weitere Partner
           </div>
 
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-12 gap-y-6">
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-4 sm:gap-x-12 sm:gap-y-6">
             {secondaryPartners.map((partner) => (
               <div
                 key={partner.name}

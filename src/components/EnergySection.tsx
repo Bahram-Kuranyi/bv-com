@@ -4,14 +4,14 @@ import { ArrowRight, Flame, Home, ShieldCheck, Zap } from "lucide-react";
 
 export default function EnergySection() {
   return (
-    <section className="relative z-20 py-20 md:py-24">
+    <section className="relative z-20 py-12 sm:py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-5 lg:px-8">
         <div className="overflow-hidden rounded-[2rem] border border-zinc-200 bg-white shadow-sm">
           <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
             {/* Left */}
-            <div className="flex flex-col justify-between bg-zinc-950 p-8 text-white sm:p-10 lg:p-12">
+            <div className="flex flex-col justify-between bg-zinc-950 p-5 text-white sm:p-10 lg:p-12">
               <div>
-                <div className="w-28 sm:w-32">
+                <div className="w-16 sm:w-24 lg:w-32">
                   <Image
                     src="/partners/strom-gas.png"
                     alt="Strom und Gas"
@@ -21,7 +21,7 @@ export default function EnergySection() {
                   />
                 </div>
 
-                <div className="mt-8 text-xs font-black uppercase tracking-[0.22em] text-fuchsia-400">
+                <div className="mt-5 text-xs lg:mt-8 font-black uppercase tracking-[0.22em] text-fuchsia-400">
                   Energie
                 </div>
 
@@ -43,7 +43,7 @@ export default function EnergySection() {
             </div>
 
             {/* Right */}
-            <div className="p-8 sm:p-10 lg:p-12">
+            <div className="p-5 sm:p-10 lg:p-12">
               <div className="text-xs font-black uppercase tracking-[0.22em] text-fuchsia-600">
                 Energieberatung
               </div>
@@ -83,7 +83,7 @@ export default function EnergySection() {
                 </div>
               </div>
 
-              <div className="mt-7 flex flex-col gap-3 text-sm text-zinc-600 sm:flex-row sm:gap-7">
+              <div className="mt-7 flex flex-col gap-3 text-sm text-zinc-600 sm:flex-row sm:flex-wrap sm:gap-7">
                 <div className="flex items-center gap-2">
                   <ShieldCheck size={17} className="text-fuchsia-600" />
                   Persönliche Beratung
@@ -95,10 +95,10 @@ export default function EnergySection() {
                 </div>
               </div>
 
-              <button className="mt-8 flex items-center gap-2 rounded-full bg-zinc-950 px-6 py-3.5 font-bold text-white transition hover:bg-fuchsia-600">
+              <a href="#kontakt" className="mt-8 flex w-full justify-center sm:w-fit items-center gap-2 rounded-full bg-zinc-950 px-6 py-3.5 font-bold text-white transition hover:bg-fuchsia-600">
                 Energieberatung
                 <ArrowRight size={17} />
-              </button>
+              </a>
             </div>
           </div>
         </div>
